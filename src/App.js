@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Redirect from "./pages/Redirect";
+import Dashboard from "./pages/Dashboard";
+import Onboarding from "./pages/Onboarding/Onboarding";
+import OnboardingVideo from "./pages/Onboarding/OnboardingVideo";
+import OnboardingAlarm from "./pages/Onboarding/OnboardingAlarm";
+import OnboardingFinished from "./pages/Onboarding/OnboardingFinished";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Redirect />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="onboarding">
+          <Route index element={<Onboarding />} />
+          <Route path="video" element={<OnboardingVideo />} />
+          <Route path="alarm" element={<OnboardingAlarm />} />
+          <Route path="finished" element={<OnboardingFinished />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
