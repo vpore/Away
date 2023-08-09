@@ -10,11 +10,10 @@ const useStore = create((set) => ({
   errorThreshold: 10,
   setErrorThreshold: (errorThreshold) => set(() => ({ errorThreshold })),
 
-  setMultipleKeys: (keys) => set(() => ({ ...keys })), //del maybe
   setMultipleIntKeys: (keys) =>
     set(() =>
       Object.keys(keys).reduce(
-        (acc, key) => ({ ...acc, [key]: parseInt(keys[key]) }),
+        (prev, key) => ({ ...prev, [key]: parseInt(keys[key]) }),
         {}
       )
     ),

@@ -10,7 +10,6 @@ import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [renderingEnabled, setRenderingEnabled] = useState(true);
   
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -18,8 +17,7 @@ const Dashboard = () => {
   
   const { loaded, getFaceDistance } = useFace(
     videoRef,
-    canvasRef,
-    renderingEnabled
+    canvasRef
   );
   
   const { alarmMethod, faceDistance, errorThreshold } = useStore();
@@ -33,7 +31,6 @@ const Dashboard = () => {
       getFaceDistance() - faceDistance > errorThreshold
     ){
         sentNotification = true;
-        
         if (alarmMethod === 0) {
             new Notification("Away!", {
                 body: "Keep your face away from the screen!",
@@ -60,9 +57,7 @@ const Dashboard = () => {
       <h1 className={styles.title}>Welcome to the Dashboard.</h1>
       <p className={styles.description}>
         Just keep this app running in the background somewhere and we'll notify
-        you if your face gets too close to the screen. If this is taking too
-        many computer resources, try turning off result rendering in the
-        settings down below.
+        you if your face gets too close to the screen.
       </p>
 
       <audio src="/horn.mp3" ref={audioRef}></audio>
@@ -77,8 +72,6 @@ const Dashboard = () => {
         {modalOpen && (
           <Settings
             closeModal={() => setModalOpen(false)}
-            renderingEnabled={renderingEnabled}
-            setRenderingEnabled={setRenderingEnabled}
           />
         )}
       </div>

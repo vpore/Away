@@ -1,7 +1,7 @@
 import * as faceapi from "face-api.js";
 import { useEffect, useState, useRef } from "react";
 
-const useFace = (videoRef, canvasRef, fullspeed = true) => {
+const useFace = (videoRef, canvasRef) => {
   const [apiLoaded, setApiLoaded] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
 
@@ -58,7 +58,7 @@ const useFace = (videoRef, canvasRef, fullspeed = true) => {
             .withFaceLandmarks();
 
           ctx.clearRect(0, 0, size.width, size.height);
-          if (detections.length && fullspeed) {
+          if (detections.length) {
             faceapi.draw.drawDetections(canvas, detections);
             faceapi.draw.drawFaceLandmarks(canvas, detections);
           }
@@ -77,7 +77,7 @@ const useFace = (videoRef, canvasRef, fullspeed = true) => {
             );
           }
         },
-        fullspeed ? 1000 / 60 : 1000
+        1000/60
       );
 
       setVideoLoaded(true);
@@ -91,7 +91,7 @@ const useFace = (videoRef, canvasRef, fullspeed = true) => {
       // stop detections
       clearInterval(intervalId);
     };
-  }, [apiLoaded, fullspeed]);
+  }, [apiLoaded]);
 
   return {
     loaded: apiLoaded && videoLoaded,
