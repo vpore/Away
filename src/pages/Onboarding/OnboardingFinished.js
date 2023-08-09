@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import electronFetch from "../../utils/electronFetch";
 import useStore from "../../hooks/useStore";
 
 const OnboardingFinished = () => {
   const { alarmMethod, faceDistance } = useStore();
-  const [savedSettings, setSavedSettings] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,8 +15,7 @@ const OnboardingFinished = () => {
         faceDistance,
         errorThreshold: 10,
       });
-      
-      setSavedSettings(true);
+
       navigate("/dashboard");
     })();
   }, []);

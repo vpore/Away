@@ -10,7 +10,7 @@ import styles from "../../pages/Dashboard.module.css";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Settings = ({ closeModal }) => {
-  const { alarmMethod, setAlarmMethod, faceDistance, setFaceDistance, errorThreshold, setErrorThreshold } = useStore();
+  const { alarmMethod } = useStore();
   const navigate = useNavigate();
   return (
     <>
